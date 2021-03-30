@@ -23,7 +23,7 @@ class RouletteGame:
     def resolve_game(self):
         if self.random_number == self.choice_number:
             self.winnings = self.bet_value + (self.bet_value * 3)
-        elif self.random_number % 2 == 0 and self.choice_number % 2 == 0:
+        elif self.random_number % 2 == self.choice_number % 2:
             self.winnings = self.bet_value + (self.bet_value / 2)
         else:
             self.winnings -= self.bet_value
