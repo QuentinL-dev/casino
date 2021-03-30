@@ -40,12 +40,19 @@ class RouletteGame:
         self.winnings = 0
 
     def play(self):
-        while True:
+        is_running = True
+        while is_running:
             self.spin_roulette()
             self.select_a_number()
             self.bet()
             self.resolve_game()
             self.reset_game()
+
+            check_if_running = input("Voulez-vous continuer ? (O/n) ")
+            if check_if_running == 'O' or check_if_running == 'o':
+                is_running = True
+            else:
+                is_running = False
 
 
 game = RouletteGame()
