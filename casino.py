@@ -1,6 +1,7 @@
 #!/usr/bin/env python3.9
 # -*- coding:utf-8 -*-
 from random import randint
+import os
 
 
 class RouletteGame:
@@ -11,6 +12,7 @@ class RouletteGame:
         self.choice_number = 0
         self.bet_value = 0
         self.winnings = 0
+        os.system('clear')
         print("Jeu de la Roulette")
         print("Vous disposez de 1000 euros pour jouer.")
         print("Bonne chance!\n")
@@ -99,6 +101,8 @@ class RouletteGame:
                 is_running = True
             else:
                 is_running = False
+
+            os.system('clear')
 
         self.finish()
 
