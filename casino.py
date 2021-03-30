@@ -6,10 +6,14 @@ from random import randint
 class RouletteGame:
 
     def __init__(self):
+        self.pot = 1000
         self.random_number = 0
         self.choice_number = 0
         self.bet_value = 0
         self.winnings = 0
+        print("Jeu de la Roulette")
+        print("Vous disposez de 1000 euros pour jouer.")
+        print("Bonne chance!")
 
     def spin_roulette(self):
         self.random_number = randint(0, 49)
@@ -44,9 +48,12 @@ class RouletteGame:
         else:
             self.winnings -= self.bet_value
 
+        self.pot += self.winnings
+
         print(f"\nVous avez misé {self.bet_value} sur {self.choice_number}.")
         print(f"La roulette a donné le nombre {self.random_number}.")
         print(f"Vos gains sont donc: {self.winnings}.")
+        print(f"Votre cagnote est actuellement de {self.pot}")
         print("Tour suivant...\n")
 
     def reset_game(self):
@@ -54,6 +61,12 @@ class RouletteGame:
         self.choice_number = 0
         self.bet_value = 0
         self.winnings = 0
+
+    def finish(self):
+        if self.pot > 0:
+            print(f"Bien joué! Vous avez gagné {self.pot} euro(s).")
+        else:
+            print(f"Pas de chance! Vous devez {self.pot} euro(s).")
 
     def play(self):
         is_running = True
@@ -69,6 +82,8 @@ class RouletteGame:
                 is_running = True
             else:
                 is_running = False
+
+        self.finish()
 
 
 game = RouletteGame()
