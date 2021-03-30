@@ -15,10 +15,26 @@ class RouletteGame:
         self.random_number = randint(0, 49)
 
     def select_a_number(self):
-        self.choice_number = int(input("Choisir un nombre entre 0 et 49 : "))
+        bad_value = True
+        while bad_value:
+            self.choice_number = input("Choisir un nombre entre 0 et 49 : ")
+            try:
+                self.choice_number = int(self.choice_number)
+                bad_value = False
+            except ValueError as err:
+                bad_value = True
+                print(err)
 
     def bet(self):
-        self.bet_value = int(input("Votre mise : "))
+        bad_value = True
+        while bad_value:
+            self.bet_value = input("Votre mise : ")
+            try:
+                self.bet_value = int(self.bet_value)
+                bad_value = False
+            except ValueError as err:
+                bad_value = True
+                print(err)
 
     def resolve_game(self):
         if self.random_number == self.choice_number:
