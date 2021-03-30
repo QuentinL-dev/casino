@@ -13,7 +13,24 @@ class RouletteGame:
         self.winnings = 0
         print("Jeu de la Roulette")
         print("Vous disposez de 1000 euros pour jouer.")
-        print("Bonne chance!")
+        print("Bonne chance!\n")
+        want_help = input("Voulez-vous afficher l'aide ? (O/n) ")
+        if want_help == 'O' or want_help == 'o':
+            self.help()
+
+    def help(self):
+        print("\n==========> JEU DE LA ROULETTE <==========")
+        print("Ce programme est une implémentation simplifiée du jeu de la roulette.")
+        print("Vous disposez d'une cagnote de 1000 euros en début de partie.")
+        print("À chaque tour, vous devrez :")
+        print("\t- Choisir un nombre entre 0 et 49")
+        print("\t- Miser la somme de votre choix")
+        print("Une fois la roulette lancé :")
+        print("\t- Si votre nombre est le nombre tiré, vous remportez 3 fois la mise.")
+        print("\t- Si votre nombre est de la même couleur que le nombre tiré, vous remporté la moitié de la mise.")
+        print("\t- Sinon vous perdez votre mise.")
+        print("Vous pouvez jouer autant de fois que vous voulez.")
+        print("=========================================\n")
 
     def spin_roulette(self):
         self.random_number = randint(0, 49)
