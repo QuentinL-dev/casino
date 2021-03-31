@@ -125,8 +125,10 @@ class RouletteGame:
         """
         Affiche les gains de l'utilisateur à la fin de la partie.
         """
-        if self.pot > 0:
+        if self.pot > 1000:
             print(f"Bien joué! Vous avez gagné {self.pot} euro(s).")
+        elif self.pot > 0:
+            print(f"Pas de chance! Vous avez perdu {1000-self.pot} euro(s).")
         else:
             print(f"Pas de chance! Vous devez {abs(self.pot)} euro(s).")
 
