@@ -16,7 +16,7 @@ class RouletteGame:
         else:
             data = None
 
-        # Définition des attributs de classe
+        # Définition des attributs d'instance
         if data == None:
             self.pot = 1000
             self.random_number = 0
