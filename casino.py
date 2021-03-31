@@ -128,7 +128,7 @@ class RouletteGame:
         if self.pot > 0:
             print(f"Bien joué! Vous avez gagné {self.pot} euro(s).")
         else:
-            print(f"Pas de chance! Vous devez {self.pot} euro(s).")
+            print(f"Pas de chance! Vous devez {abs(self.pot)} euro(s).")
 
     def play(self):
         """
