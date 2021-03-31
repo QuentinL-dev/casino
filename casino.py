@@ -29,7 +29,7 @@ class RouletteGame:
         print("\t- Miser la somme de votre choix")
         print("Une fois la roulette lancé :")
         print("\t- Si votre nombre est le nombre tiré, vous remportez 3 fois la mise.")
-        print("\t- Si votre nombre est de la même couleur que le nombre tiré, vous remporté la moitié de la mise.")
+        print("\t- Si votre nombre est de la même couleur que le nombre tiré, vous remportez la moitié de la mise.")
         print("\t- Sinon vous perdez votre mise.")
         print("Vous pouvez jouer autant de fois que vous voulez.")
         print("=========================================\n")
@@ -43,7 +43,11 @@ class RouletteGame:
             self.choice_number = input("Choisir un nombre entre 0 et 49 : ")
             try:
                 self.choice_number = int(self.choice_number)
-                bad_value = False
+                if self.choice_number not in range(50):
+                    bad_value = True
+                    print("Attention - Vous devez choisir un nombre entre 0 et 49.")
+                else:
+                    bad_value = False
             except ValueError as err:
                 bad_value = True
                 print(err)
