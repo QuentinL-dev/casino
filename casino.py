@@ -1,21 +1,28 @@
 #!/usr/bin/env python3.9
 # -*- coding:utf-8 -*-
 from random import randint
-import os
+from os import system
 
 
 class RouletteGame:
 
     def __init__(self):
+        # Définition des attributs de classe
         self.pot = 1000
         self.random_number = 0
         self.choice_number = 0
         self.bet_value = 0
         self.winnings = 0
-        os.system('clear')
+
+        # Nettoyage de l'écran
+        system('clear')
+
+        # Initialisation de l'interface
         print("Jeu de la Roulette")
         print("Vous disposez de 1000 euros pour jouer.")
         print("Bonne chance!\n")
+
+        # Demander à l'utilisateur d'afficher l'aide
         want_help = input("Voulez-vous afficher l'aide ? (O/n) ")
         if want_help == 'O' or want_help == 'o':
             self.help()
@@ -35,9 +42,20 @@ class RouletteGame:
         print("=========================================\n")
 
     def spin_roulette(self):
+        """
+        Simulation d'un lancement de roulette.
+        Cette fonction affecte un nombre aléatoire entre 0 et 49 à la
+        variable self.random_number.
+        """
         self.random_number = randint(0, 49)
 
     def select_a_number(self):
+        """
+        Fonction qui permet de demander un nombre à l'utilisateur.
+        La boucle while effectue les vérifications nécessaires, en
+        particulier que la valeur saisie est bien un entier compris
+        entre 0 et 49.
+        """
         bad_value = True
         while bad_value:
             self.choice_number = input("Choisir un nombre entre 0 et 49 : ")
@@ -53,17 +71,32 @@ class RouletteGame:
                 print(err)
 
     def bet(self):
+        """
+        Fonction qui permet de demander la mise de l'utilisateur.
+        La boucle while effectue les vérifications nécessaires, en
+        particulier que la valeur saisie est bien un entier supérieur
+        à 10.
+        """
         bad_value = True
         while bad_value:
             self.bet_value = input("Votre mise : ")
             try:
                 self.bet_value = int(self.bet_value)
-                bad_value = False
+                if self.bet_value < 10:
+                    bad_value = True
+                    print("Attention - Vous devez miser au moins 10 euros.")
+                else:
+                    bad_value = False
             except ValueError as err:
                 bad_value = True
                 print(err)
 
     def resolve_game(self):
+        """
+        Résolution du tour.
+        Permet de définir les gains de l'utilisateur pour chaque
+        tour.
+        """
         if self.random_number == self.choice_number:
             self.winnings = self.bet_value + (self.bet_value * 3)
         elif self.random_number % 2 == self.choice_number % 2:
@@ -80,18 +113,27 @@ class RouletteGame:
         print("Tour suivant...\n")
 
     def reset_game(self):
+        """
+        Remise à 0 des attributs de classe.
+        """
         self.random_number = 0
         self.choice_number = 0
         self.bet_value = 0
         self.winnings = 0
 
     def finish(self):
+        """
+        Affiche les gains de l'utilisateur à la fin de la partie.
+        """
         if self.pot > 0:
             print(f"Bien joué! Vous avez gagné {self.pot} euro(s).")
         else:
             print(f"Pas de chance! Vous devez {self.pot} euro(s).")
 
     def play(self):
+        """
+        Boucle principale du jeu.
+        """
         is_running = True
         while is_running:
             self.spin_roulette()
@@ -106,11 +148,12 @@ class RouletteGame:
             else:
                 is_running = False
 
-            os.system('clear')
+            system('clear')
 
         self.finish()
 
 
-game = RouletteGame()
-game.play()
+if __name__ == "__main__":
+    game = RouletteGame()
+    game.play()
         
