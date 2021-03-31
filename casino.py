@@ -2,30 +2,73 @@
 # -*- coding:utf-8 -*-
 from random import randint
 from os import system
+from os.path import isfile
+from pickle import Pickler, Unpickler
 
 
 class RouletteGame:
 
     def __init__(self):
+        # Lecture de la base de données
+        want_load_data = input("Voulez-vous continuer la partie précédente ? (O/n) ")
+        if want_load_data == 'O' or want_load_data == 'o':
+            data = self.read_data()
+        else:
+            data = None
+
         # Définition des attributs de classe
-        self.pot = 1000
-        self.random_number = 0
-        self.choice_number = 0
-        self.bet_value = 0
-        self.winnings = 0
+        if data == None:
+            self.pot = 1000
+            self.random_number = 0
+            self.choice_number = 0
+            self.bet_value = 0
+            self.winnings = 0
+        else:
+            self.pot = data["pot"]
+            self.random_number = data["random_number"]
+            self.choice_number = data["choice_number"]
+            self.bet_value = data["bet_value"]
+            self.winnings = data["winnings"]
 
         # Nettoyage de l'écran
         system('clear')
 
         # Initialisation de l'interface
         print("Jeu de la Roulette")
-        print("Vous disposez de 1000 euros pour jouer.")
+        print(f"Vous disposez de {self.pot} euros pour jouer.")
         print("Bonne chance!\n")
 
         # Demander à l'utilisateur d'afficher l'aide
         want_help = input("Voulez-vous afficher l'aide ? (O/n) ")
         if want_help == 'O' or want_help == 'o':
             self.help()
+
+    def read_data(self):
+        """
+        Permet de lire la base de données data.dat, si elle existe.
+        """
+        if isfile("./data.dat"):
+            with open("./data.dat", 'rb') as data_file:
+                data_pickle = Unpickler(data_file)
+                data = data_pickle.load()
+            return data
+        else:
+            return None
+
+    def save_data(self):
+        """
+        Sauvegarde les données à la fin de la partie.
+        """
+        data = {
+            "pot": self.pot,
+            "random_number": self.random_number,
+            "choice_number": self.choice_number,
+            "bet_value": self.bet_value,
+            "winnings": self.winnings
+        }
+        with open("./data.dat", 'wb') as data_file:
+            data_pickle = Pickler(data_file)
+            data_pickle.dump(data)
 
     def help(self):
         print("\n==========> JEU DE LA ROULETTE <==========")
@@ -154,7 +197,11 @@ class RouletteGame:
 
             system('clear')
 
-        self.finish()
+        want_save = input("Voulez-vous sauvegarder les données de cette partie ? (O/n) ")
+        if want_save == 'O' or want_save == 'o':
+            self.save_data()
+        else:
+            self.finish()
 
 
 if __name__ == "__main__":
