@@ -68,7 +68,8 @@ class RouletteGame:
                     bad_value = False
             except ValueError as err:
                 bad_value = True
-                print(err)
+                print("Attention - Vous devez choisir un nombre entier.")
+                print("Error description: " + str(err))
 
     def bet(self):
         """
@@ -89,7 +90,8 @@ class RouletteGame:
                     bad_value = False
             except ValueError as err:
                 bad_value = True
-                print(err)
+                print("Attention - Vous devez choisir un nombre entier.")
+                print("Error description: " + str(err))
 
     def resolve_game(self):
         """
